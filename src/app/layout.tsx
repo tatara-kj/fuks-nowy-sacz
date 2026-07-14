@@ -18,7 +18,9 @@ const barlow = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://fuks-nowy-sacz.vercel.app",
+  ),
   title: "FUKS — prawo jazdy i kursy zawodowe | Nowy Sącz",
   description:
     "FUKS w Nowym Sączu: kursy prawa jazdy kategorii A, B, B+E, C, C+E, D i T oraz szkolenia zawodowe kierowców. Koncepcyjna strona demonstracyjna.",
