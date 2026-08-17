@@ -148,7 +148,7 @@ function CourseDetails({ course, onClose }: { course: Course; onClose: () => voi
         <button className="course-dialog__close" type="button" onClick={onClose} aria-label="Zamknij informacje o kursie" autoFocus><X aria-hidden="true" /></button>
         <Icon className="course-dialog__icon" aria-hidden="true" />
         <span>{course.kicker}</span>
-        <strong>{course.code}</strong>
+        <strong className={`course-dialog__code ${course.code.length > 8 ? "course-dialog__code--long" : ""}`}>{course.code}</strong>
         <h2 id={`course-dialog-${course.id}`}>{course.title}</h2>
         <p>{course.summary}</p>
         <div className="course-dialog__age"><small>Minimalny wiek</small><b>{course.minimumAge}</b></div>

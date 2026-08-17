@@ -74,6 +74,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body>
         <a className="skip-link" href="#main-content">Przejdź do treści</a>
+        <div className="scroll-progress" aria-hidden="true" />
         {children}
         <Analytics />
         <SpeedInsights />

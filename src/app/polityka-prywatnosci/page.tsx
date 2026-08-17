@@ -26,7 +26,7 @@ export default function PrivacyPage() {
         <h2>Analityka wydajności</h2>
         <p>Używamy Vercel Web Analytics i Speed Insights do zbiorczego pomiaru odwiedzin oraz jakości działania strony. Rozwiązania te są skonfigurowane bez Google Analytics i bez profili reklamowych.</p>
         <h2>Serwisy zewnętrzne</h2>
-        <p>Linki do Facebooka, BUR i Map Google prowadzą do zewnętrznych serwisów działających według własnych zasad prywatności. Mapa Google jest ładowana dopiero po kliknięciu przycisku „Załaduj mapę”.</p>
+        <p>Linki do Facebooka, BUR i Map Google prowadzą do zewnętrznych serwisów działających według własnych zasad prywatności. W sekcji aktualności osadzamy oficjalną oś czasu Facebooka, a w kontakcie Mapę Google. Załadowanie tych elementów powoduje połączenie z serwerami odpowiednio Meta lub Google i może wiązać się z przetwarzaniem danych technicznych, takich jak adres IP, ustawienia przeglądarki i informacje o żądaniu.</p>
         <h2>Twoje prawa</h2>
         <p>Jeżeli skontaktujesz się ze szkołą telefonicznie lub e-mailowo, możesz zapytać o podstawę i zakres przetwarzania przekazanych danych oraz skorzystać z praw wynikających z obowiązujących przepisów.</p>
         <p className="legal-page__date">Ostatnia aktualizacja: 17 sierpnia 2026 r.</p>

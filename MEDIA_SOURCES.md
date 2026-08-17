@@ -24,6 +24,8 @@ Pliki pochodzą z archiwum `zdjeciafloty.zip` przekazanego przez użytkownika. U
 
 ## Aktualności z Facebooka
 
+Najnowsze wpisy są prezentowane przez oficjalny Facebook Page Plugin. Poniższe lokalne pliki pozostają wyróżnionymi podglądami i fallbackiem, gdy osadzenie Meta jest niedostępne lub blokowane przez przeglądarkę.
+
 | Plik lokalny | Oficjalny materiał |
 | --- | --- |
 | `public/images/social/nowa-skoda-fabia-facebook.jpg` | [zapowiedź nowej Škody Fabii](https://www.facebook.com/reel/1358855983115060/) |

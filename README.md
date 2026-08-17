@@ -9,7 +9,8 @@ Produkcyjna strona informacyjno-sprzedażowa FUKS Krzysztof Groń. Serwis obejmu
 - aktualne na 17.08.2026 progi wieku, wymagania, dokumenty i ważne zmiany prawne;
 - zapisy wyłącznie przez telefon — bez atrap formularzy, płatności i terminów;
 - podstrona `/kursy-zawodowe` w kontrolowanym trybie „w przygotowaniu”;
-- lokalne zdjęcia floty i marki, bez hotlinkowania zasobów Facebooka;
+- lokalne zdjęcia floty i marki, bez hotlinkowania plików graficznych z Facebooka;
+- responsywna, automatycznie aktualizowana oś czasu oficjalnego profilu FUKS z lokalnym fallbackiem;
 - lokalne SEO dla Nowego Sącza i Bobowej, JSON-LD, sitemap, robots i Open Graph;
 - Vercel Web Analytics i Speed Insights, bez Google Analytics;
 - dostępność klawiaturą, `prefers-reduced-motion` i responsywność od 360 px.

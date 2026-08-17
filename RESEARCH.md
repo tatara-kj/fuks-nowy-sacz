@@ -30,4 +30,4 @@ Nie publikujemy niezweryfikowanych godzin programu kursów ani ogólnego cennika
 
 ## Integracje i prywatność
 
-Oficjalna wtyczka aktualności Facebooka nie została automatycznie osadzona. Serwis używa lokalnych podglądów i linków do profilu, więc nie wysyła żądań do Meta przy samym wejściu na stronę. Mapa Google ładuje się dopiero po kliknięciu użytkownika.
+Sekcja aktualności zawiera responsywną, oficjalną oś czasu Facebook Page Plugin, więc nowe posty pojawiają się bez ręcznej edycji strony. Lokalne podglądy pozostają jako fallback. Mapa Google jest osadzona bez dodatkowego kliknięcia. Obie integracje są ładowane leniwie, gdy użytkownik zbliża się do odpowiedniej sekcji, i mogą łączyć się z serwerami Meta lub Google — opisano to w politykach prywatności i cookies.

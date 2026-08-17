@@ -1,15 +1,11 @@
 "use client";
 
 import { Clock3, ExternalLink, Mail, MapPin, Phone, Route, ShieldCheck } from "lucide-react";
-import { useState } from "react";
 import { useBranch } from "@/components/branch-experience";
-import { contact, type BranchKey } from "@/data/site";
+import { contact } from "@/data/site";
 
 export function ContactSection() {
   const { branch, showSelector } = useBranch();
-  const [mapLoadedFor, setMapLoadedFor] = useState<BranchKey | null>(null);
-  const mapLoaded = mapLoadedFor === branch.key;
-
   const embedUrl = `https://www.google.com/maps?q=${encodeURIComponent(branch.mapQuery)}&output=embed`;
 
   return (
@@ -28,17 +24,8 @@ export function ContactSection() {
 
         <div className="contact-layout">
           <div className="contact-map">
-            {mapLoaded ? (
-              <iframe title={`Mapa oddziału FUKS — ${branch.shortLabel}`} src={embedUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
-            ) : (
-              <div className="contact-map__placeholder">
-                <div className="contact-map__grid" aria-hidden="true" />
-                <span className="contact-map__pin"><MapPin aria-hidden="true" /></span>
-                <p><strong>{branch.shortLabel}</strong>{branch.address}</p>
-                <button className="button button--yellow" type="button" onClick={() => setMapLoadedFor(branch.key)}><MapPin aria-hidden="true" /> Załaduj mapę</button>
-                <small>Mapa Google zostanie pobrana dopiero po kliknięciu.</small>
-              </div>
-            )}
+            <iframe title={`Mapa oddziału FUKS — ${branch.shortLabel}`} src={embedUrl} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
+            <span className="contact-map__label">Mapa oddziału · {branch.shortLabel}</span>
           </div>
 
           <div className="contact-card">

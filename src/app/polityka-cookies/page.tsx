@@ -16,15 +16,15 @@ export default function CookiesPage() {
       <article className="legal-page__content">
         <span className="section-number">INFORMACJE PRAWNE</span>
         <h1>Polityka cookies</h1>
-        <p className="legal-page__lead">Strona ogranicza mechanizmy zapisu w przeglądarce do minimum potrzebnego do wygodnego działania.</p>
+        <p className="legal-page__lead">Strona zapisuje lokalnie wybór oddziału oraz korzysta z osadzonych treści Facebooka i Map Google.</p>
         <h2>Zapamiętanie oddziału</h2>
         <p>Po wybraniu Nowego Sącza albo Bobowej zapisujemy w pamięci lokalnej przeglądarki preferencję oddziału. Dzięki temu nie pytamy o oddział przy każdym wejściu. Możesz ją usunąć w ustawieniach danych witryny w swojej przeglądarce.</p>
         <h2>Vercel Web Analytics i Speed Insights</h2>
         <p>Serwis korzysta ze zbiorczych pomiarów odwiedzin i wydajności dostarczanych przez Vercel. Nie instalujemy Google Analytics ani pikseli reklamowych Meta.</p>
         <h2>Treści zewnętrzne</h2>
-        <p>Nie ładujemy automatycznie wtyczki Facebooka. Aktualności są lokalnymi podglądami prowadzącymi do oficjalnego profilu. Mapa Google jest uruchamiana dopiero po świadomym kliknięciu użytkownika; wtedy Google może zastosować własne technologie zgodnie ze swoją polityką.</p>
+        <p>Sekcja aktualności zawiera oficjalną oś czasu Facebooka, dzięki czemu nowe wpisy mogą pojawiać się automatycznie. Sekcja kontaktowa zawiera osadzoną Mapę Google. Po załadowaniu tych elementów Meta lub Google mogą stosować własne pliki cookies i podobne technologie zgodnie ze swoimi zasadami.</p>
         <h2>Zarządzanie danymi witryny</h2>
-        <p>W ustawieniach przeglądarki możesz przeglądać i usuwać dane zapisane dla tej domeny. Wyłączenie pamięci lokalnej nie blokuje dostępu do treści, ale może spowodować ponowne wyświetlenie wyboru oddziału. Serwis nie uruchamia opcjonalnych cookies marketingowych, dlatego nie pokazuje pozornego panelu zgód; decyzję o załadowaniu Map Google podejmujesz każdorazowo przy mapie.</p>
+        <p>W ustawieniach przeglądarki możesz przeglądać i usuwać dane zapisane dla tej domeny oraz ograniczyć cookies stron trzecich. Wyłączenie pamięci lokalnej może spowodować ponowne wyświetlenie wyboru oddziału, a blokowanie treści zewnętrznych może ukryć oś czasu Facebooka lub mapę. Wyróżnione aktualności, adresy i bezpośrednie linki pozostają dostępne także bez tych osadzeń.</p>
         <p className="legal-page__date">Ostatnia aktualizacja: 17 sierpnia 2026 r.</p>
       </article>
     </main>

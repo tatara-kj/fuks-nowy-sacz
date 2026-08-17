@@ -19,6 +19,7 @@ import { BranchProvider } from "@/components/branch-experience";
 import { ContactSection } from "@/components/contact-section";
 import { CourseBrowser } from "@/components/course-browser";
 import { FAQ } from "@/components/faq";
+import { FacebookFeed } from "@/components/facebook-feed";
 import { Footer } from "@/components/footer";
 import { Gallery } from "@/components/gallery";
 import { Hero } from "@/components/hero";
@@ -177,19 +178,25 @@ export default function Home() {
                 <h2 id="news-title">Co nowego<br /><em>w FUKS?</em></h2>
               </div>
               <div className="news-heading__aside">
-                <p>Podglądy pochodzą z oficjalnego profilu. Najświeższe informacje zawsze znajdziesz bezpośrednio na Facebooku.</p>
+                <p>Oś czasu pobiera najnowsze wpisy z oficjalnego profilu. Poniżej zostawiamy również wyróżnione aktualności jako szybki podgląd i bezpieczny fallback.</p>
                 <a href={contact.facebook} target="_blank" rel="noreferrer"><FacebookIcon aria-hidden="true" /> Obserwuj profil <ExternalLink aria-hidden="true" /></a>
               </div>
             </div>
-            <div className="news-grid">
-              {news.map((item) => (
-                <article className="news-card" key={item.title}>
-                  <a href={item.href} target="_blank" rel="noreferrer" aria-label={`${item.title} — otwórz na Facebooku`}>
-                    <span className="news-card__image"><Image src={item.image} alt="" fill sizes="(max-width: 760px) 100vw, 33vw" /></span>
-                    <span className="news-card__content"><small>{item.label}</small><h3>{item.title}</h3><p>{item.text}</p><span>Czytaj na Facebooku <ExternalLink aria-hidden="true" /></span></span>
-                  </a>
-                </article>
-              ))}
+            <div className="news-live-layout">
+              <FacebookFeed />
+              <div className="news-curated">
+                <span className="news-curated__label">Wyróżnione wpisy</span>
+                <div className="news-grid news-grid--curated">
+                  {news.map((item) => (
+                    <article className="news-card" key={item.title}>
+                      <a href={item.href} target="_blank" rel="noreferrer" aria-label={`${item.title} — otwórz na Facebooku`}>
+                        <span className="news-card__image"><Image src={item.image} alt="" fill sizes="(max-width: 700px) 100vw, (max-width: 1100px) 30vw, 210px" /></span>
+                        <span className="news-card__content"><small>{item.label}</small><h3>{item.title}</h3><p>{item.text}</p><span>Czytaj na Facebooku <ExternalLink aria-hidden="true" /></span></span>
+                      </a>
+                    </article>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
