@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const manrope = localFont({
@@ -17,54 +20,61 @@ const barlow = localFont({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fuks-nowy-sacz.vercel.app";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://fuks-nowy-sacz.vercel.app",
-  ),
-  title: "FUKS — prawo jazdy i kursy zawodowe | Nowy Sącz",
-  description:
-    "FUKS w Nowym Sączu: kursy prawa jazdy kategorii A, B, B+E, C, C+E, D i T oraz szkolenia zawodowe kierowców. Koncepcyjna strona demonstracyjna.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "FUKS — szkoła jazdy Nowy Sącz i Bobowa",
+    template: "%s | FUKS",
+  },
+  description: "FUKS: kursy prawa jazdy AM, A1, A2, A, B1, B, B+E, C, C+E, D1, D i T oraz kwalifikacje, ADR i szkolenia zawodowe w Nowym Sączu i Bobowej.",
   keywords: [
     "szkoła jazdy Nowy Sącz",
+    "szkoła jazdy Bobowa",
     "prawo jazdy Nowy Sącz",
     "kurs prawa jazdy kat B Nowy Sącz",
-    "prawo jazdy kat C Nowy Sącz",
-    "kurs C+E Nowy Sącz",
+    "prawo jazdy C C+E",
+    "kurs ADR Nowy Sącz",
     "FUKS Krzysztof Groń",
-    "kursy zawodowe kierowców Nowy Sącz",
   ],
-  authors: [{ name: "Projekt demonstracyjny FUKS" }],
+  authors: [{ name: "FUKS Krzysztof Groń" }],
+  creator: "FUKS Krzysztof Groń",
   category: "education",
   openGraph: {
-    title: "FUKS — ruszaj po swoje",
-    description: "Prawo jazdy i szkolenia zawodowe w Nowym Sączu. Od pierwszej jazdy po zawodową trasę.",
+    title: "FUKS — Lubimy uczyć jeździć",
+    description: "Prawo jazdy wszystkich kategorii i szkolenia zawodowe w Nowym Sączu i Bobowej.",
+    url: siteUrl,
     locale: "pl_PL",
     type: "website",
-    siteName: "FUKS Nowy Sącz — demo",
+    siteName: "FUKS Krzysztof Groń",
+    images: [{ url: "/images/fleet/samochody-szkola-jazdy-fuks.jpg", width: 2048, height: 2048, alt: "Flota szkoły jazdy FUKS" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "FUKS — prawo jazdy i kursy zawodowe",
-    description: "Nowy Sącz · kategorie osobowe, motocyklowe i zawodowe.",
+    title: "FUKS — Lubimy uczyć jeździć",
+    description: "Szkoła jazdy i kursy zawodowe · Nowy Sącz · Bobowa",
+    images: ["/images/fleet/samochody-szkola-jazdy-fuks.jpg"],
   },
-  robots: {
-    index: false,
-    follow: false,
-    nocache: true,
-  },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  colorScheme: "dark",
-  themeColor: "#080a08",
+  colorScheme: "light",
+  themeColor: "#071a5c",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pl" className={`${manrope.variable} ${barlow.variable}`}>
-      <body>{children}</body>
+    <html lang="pl" className={`${manrope.variable} ${barlow.variable}`} suppressHydrationWarning>
+      <body>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </body>
+      <Script id="restore-fuks-branch" strategy="beforeInteractive">{`try{var b=localStorage.getItem("fuks-branch:v1");if(b==="nowy-sacz"||b==="bobowa")document.documentElement.dataset.fuksBranch=b}catch(e){}`}</Script>
     </html>
   );
 }

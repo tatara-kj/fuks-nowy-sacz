@@ -1,377 +1,238 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import {
   ArrowRight,
-  ArrowUpRight,
   BadgeCheck,
   Banknote,
-  CalendarClock,
+  CalendarDays,
   Check,
-  CircleGauge,
   Clock3,
+  ExternalLink,
   GraduationCap,
-  Mail,
-  MapPin,
-  MessageCircle,
   Phone,
   Route,
   ShieldCheck,
-  Sparkles,
   Star,
-  UserRoundCheck,
+  Users,
 } from "lucide-react";
-import { BookingButton, type BookingCategory } from "@/components/booking-button";
-import { BookingModal } from "@/components/booking-modal";
-import { ContactForm } from "@/components/contact-form";
-import { CourseFinder } from "@/components/course-finder";
+import { BranchProvider } from "@/components/branch-experience";
+import { ContactSection } from "@/components/contact-section";
+import { CourseBrowser } from "@/components/course-browser";
 import { FAQ } from "@/components/faq";
 import { Footer } from "@/components/footer";
 import { Gallery } from "@/components/gallery";
 import { Hero } from "@/components/hero";
 import { MobileCta } from "@/components/mobile-cta";
 import { Navigation } from "@/components/navigation";
-import { Reveal } from "@/components/reveal";
-import { SiteExperience } from "@/components/site-experience";
-import { contact, courses, courseSteps, verifiedHighlights } from "@/data/site";
-
-const categoryForBooking: Record<string, BookingCategory> = {
-  moto: "A",
-  b: "B",
-  be: "B+E",
-  c: "C",
-  ce: "C+E",
-  d: "D",
-  t: "T",
-  kwalifikacje: "Kwalifikacje",
-};
+import { FacebookIcon } from "@/components/social-icons";
+import { branches, contact, courseSteps, faqs, news } from "@/data/site";
 
 const reasons = [
-  {
-    icon: GraduationCap,
-    title: "Od 2003 roku",
-    text: "Dostawca deklaruje prowadzenie szkoleń kierowców od 2003 r. — to fakt zweryfikowany w publicznym profilu BUR.",
-  },
-  {
-    icon: CalendarClock,
-    title: "Terminy ustalane indywidualnie",
-    text: "W opublikowanych kartach usług praktyka jest umawiana z uczestnikiem, a przy wybranych kursach możliwy jest również wybór prowadzącego.",
-  },
-  {
-    icon: CircleGauge,
-    title: "Ciągłość szkolenia",
-    text: "W aktualnej ofercie kat. C ośrodek deklaruje egzamin na pojeździe, na którym odbywa się nauka.",
-  },
-  {
-    icon: Banknote,
-    title: "Ścieżki z dofinansowaniem",
-    text: "W BUR widoczne są usługi w programach takich jak Małopolski Pociąg do Kariery i bony szkoleniowe — dostępność trzeba potwierdzić.",
-  },
+  { icon: GraduationCap, number: "2003", title: "Uczymy od 2003 roku", text: "Ponad dwie dekady doświadczenia w szkoleniu kierowców i prowadzeniu kursów zawodowych." },
+  { icon: Users, number: "2", title: "Dwa lokalne oddziały", text: "Biura w Nowym Sączu i Bobowej oraz szkolenie dopasowane do miejsca i kategorii." },
+  { icon: Route, number: "AM–T", title: "Pełny zakres kategorii", text: "Od motoroweru i samochodu po ciężarówkę, autobus, ciągnik oraz kwalifikacje zawodowe." },
+  { icon: ShieldCheck, number: "4,7/5", title: "Ocena potwierdzona w BUR", text: "Wynik oparty na ponad 1800 ocenach usług widocznych w oficjalnym profilu dostawcy." },
 ];
 
-const packages = [
-  {
-    tag: "START",
-    title: "Kategoria B",
-    text: "Pełna ścieżka dla przyszłego kierowcy samochodu osobowego.",
-    points: ["formalności i teoria", "zajęcia praktyczne", "egzamin wewnętrzny"],
-    category: "B" as BookingCategory,
-  },
-  {
-    tag: "PRO",
-    title: "C / C+E",
-    text: "Rozwój uprawnień do pracy w transporcie rzeczy.",
-    points: ["wariant pojedynczy lub łączony", "praktyka na pojeździe ciężarowym", "możliwe programy wsparcia"],
-    category: "C" as BookingCategory,
-    featured: true,
-  },
-  {
-    tag: "PEOPLE",
-    title: "Kategoria D",
-    text: "Przygotowanie do kierowania autobusem i przewozu osób.",
-    points: ["wariant po B lub po C", "indywidualne ustalenia", "kwalifikacje do potwierdzenia"],
-    category: "D" as BookingCategory,
-  },
-];
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fuks-nowy-sacz.vercel.app";
 
-const jsonLd = {
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
+
+const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "Małopolskie Centrum Szkoleń FUKS Agnieszka i Krzysztof Groń Sp. z o.o.",
+  "@type": ["EducationalOrganization", "LocalBusiness"],
+  name: "Małopolskie Centrum Szkoleń FUKS Krzysztof Groń",
   alternateName: "FUKS Krzysztof Groń",
-  description: "Ośrodek szkolenia kierowców i kursów zawodowych w Nowym Sączu.",
+  url: siteUrl,
+  logo: `${siteUrl}/images/brand/logo-fuks.jpg`,
+  image: `${siteUrl}/images/fleet/samochody-szkola-jazdy-fuks.jpg`,
+  description: "Szkoła jazdy i centrum szkoleń zawodowych w Nowym Sączu i Bobowej.",
   foundingDate: "2003",
   telephone: "+48606647396",
-  email: "biuro.oskgron@op.pl",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "ul. Grodzka 39A",
-    postalCode: "33-300",
-    addressLocality: "Nowy Sącz",
-    addressCountry: "PL",
-  },
-  areaServed: { "@type": "City", name: "Nowy Sącz" },
-  sameAs: [contact.facebook],
+  email: contact.email,
+  sameAs: [contact.facebook, contact.bur],
+  areaServed: [{ "@type": "City", name: "Nowy Sącz" }, { "@type": "City", name: "Bobowa" }],
+  department: Object.values(branches).map((branch) => ({
+    "@type": "LocalBusiness",
+    name: `FUKS — ${branch.shortLabel}`,
+    telephone: "+48606647396",
+    email: contact.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: branch.address,
+      postalCode: branch.postalCode,
+      addressLocality: branch.city,
+      addressCountry: "PL",
+    },
+  })),
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
+  })),
 };
 
 export default function Home() {
   return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <SiteExperience />
+    <BranchProvider>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }} />
+      <a className="skip-link" href="#main-content">Przejdź do treści</a>
       <Navigation />
-
-      <main>
+      <main id="main-content">
         <Hero />
+        <CourseBrowser />
 
-        <div id="kursy" className="anchor-offset">
-          <CourseFinder />
-        </div>
-
-        <section className="categories-section" id="kategorie" aria-labelledby="categories-title">
-          <div className="section-shell">
-            <Reveal className="section-heading section-heading--split">
+        <section className="why-section section" id="dlaczego-fuks" aria-labelledby="why-title">
+          <div className="shell">
+            <div className="section-heading section-heading--split section-heading--light">
               <div>
-                <span className="section-index">02 / KATEGORIE</span>
-                <h2 id="categories-title">WYBIERZ<br /><em>SWÓJ PAS.</em></h2>
+                <span className="section-number">02 / DLACZEGO FUKS</span>
+                <h2 id="why-title">Pewność zaczyna się<br /><em>przed egzaminem.</em></h2>
               </div>
-              <div className="section-heading__aside">
-                <p>
-                  Od dwóch kół po zestaw ciężarowy. Zakres ośrodka potwierdziliśmy w dokumentach Bazy Usług Rozwojowych.
-                </p>
-                <small>Aktualny nabór i termin konkretnej kategorii potwierdź telefonicznie.</small>
+              <p>Nie uczymy skrótów. Budujemy nawyki, odpowiedzialność i kompetencje, które zostają z kierowcą na lata.</p>
+            </div>
+            <div className="why-layout">
+              <div className="why-image">
+                <Image src="/images/brand/lubimy-uczyc-jezdzic.jpg" alt="Hasło FUKS: Lubimy uczyć jeździć" fill sizes="(max-width: 900px) 100vw, 40vw" />
               </div>
-            </Reveal>
-
-            <div className="category-rail" role="list" aria-label="Kategorie prawa jazdy i szkoleń">
-              {courses.map((course, index) => {
-                const Icon = course.icon;
-                return (
-                  <Reveal className="category-card" delay={Math.min(index * 0.045, 0.25)} key={course.id}>
-                    <article role="listitem" style={{ "--card-accent": course.accent } as React.CSSProperties}>
-                      <div className="category-card__top">
-                        <span>{String(index + 1).padStart(2, "0")}</span>
-                        <Icon aria-hidden="true" />
-                      </div>
-                      <div className="category-card__code">{course.category}</div>
-                      <span className="category-card__eyebrow">
-                        {course.professional && <i aria-hidden="true" />}{course.eyebrow}
-                      </span>
-                      <h3>{course.title}</h3>
-                      <p>{course.description}</p>
-                      <div className="category-card__for">
-                        <strong>Dla kogo?</strong>
-                        <span>{course.forWhom}</span>
-                      </div>
-                      <BookingButton category={categoryForBooking[course.id]} className="category-card__button">
-                        Sprawdź kurs
-                      </BookingButton>
-                    </article>
-                  </Reveal>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        <section className="why-section" id="o-nas" aria-labelledby="why-title">
-          <div className="why-orbit" aria-hidden="true"><span>FUKS</span></div>
-          <div className="section-shell">
-            <Reveal className="why-intro">
-              <span className="section-index section-index--lime">03 / DLACZEGO FUKS</span>
-              <h2 id="why-title">TU NIE CHODZI TYLKO<br />O <em>ZDANY EGZAMIN.</em></h2>
-              <p>
-                Chodzi o moment, w którym na drodze przestajesz zgadywać. O decyzje, spokój i kompetencje, które zostają na dłużej.
-              </p>
-            </Reveal>
-
-            <div className="verified-stats" aria-label="Zweryfikowane dane o FUKS">
-              {verifiedHighlights.map((item, index) => (
-                <Reveal className="verified-stat" delay={index * 0.08} key={item.label}>
-                  <strong>{item.value}</strong>
-                  <h3>{item.label}</h3>
-                  <p>{item.note}</p>
-                </Reveal>
-              ))}
-            </div>
-
-            <div className="reasons-grid">
-              {reasons.map((reason, index) => {
-                const Icon = reason.icon;
-                return (
-                  <Reveal className="reason" delay={index * 0.06} key={reason.title}>
-                    <span className="reason__icon"><Icon aria-hidden="true" /></span>
-                    <div>
+              <div className="reasons-grid">
+                {reasons.map((reason) => {
+                  const Icon = reason.icon;
+                  return (
+                    <article className="reason-card" key={reason.title}>
+                      <div><Icon aria-hidden="true" /><strong>{reason.number}</strong></div>
                       <h3>{reason.title}</h3>
                       <p>{reason.text}</p>
-                    </div>
-                    <span className="reason__number">0{index + 1}</span>
-                  </Reveal>
-                );
-              })}
+                    </article>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="process-section" id="jak-to-dziala" aria-labelledby="process-title">
-          <div className="section-shell">
-            <Reveal className="section-heading process-heading">
-              <span className="section-index">04 / TRASA KURSU</span>
-              <h2 id="process-title">OD DECYZJI<br />DO <em>EGZAMINU.</em></h2>
-              <p>Pięć czytelnych etapów. Szczegóły formalne i czas trwania zależą od kategorii oraz Twojej sytuacji.</p>
-            </Reveal>
-
-            <div className="process-road">
-              <svg viewBox="0 0 100 680" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M50 0 C10 90 88 150 52 245 C18 335 88 405 48 500 C25 555 36 620 50 680" />
-              </svg>
-              <div className="process-steps">
-                {courseSteps.map((step, index) => (
-                  <Reveal className={`process-step process-step--${index % 2 ? "right" : "left"}`} key={step.number}>
-                    <span className="process-step__pin"><i /></span>
-                    <article>
-                      <span>{step.number}</span>
-                      <h3>{step.title}</h3>
-                      <p>{step.text}</p>
-                    </article>
-                  </Reveal>
-                ))}
+        <section className="route-section section" id="trasa-kursu" aria-labelledby="route-title">
+          <div className="shell">
+            <div className="section-heading section-heading--split">
+              <div>
+                <span className="section-number">03 / TRASA KURSU</span>
+                <h2 id="route-title">Od decyzji<br /><em>do egzaminu.</em></h2>
               </div>
+              <p>Pięć czytelnych kroków. Po wybraniu kategorii otrzymasz dokładną listę formalności dla swojej ścieżki.</p>
+            </div>
+            <ol className="route-steps">
+              {courseSteps.map((step) => <li key={step.number}><span>{step.number}</span><div><h3>{step.title}</h3><p>{step.text}</p></div></li>)}
+            </ol>
+            <div className="formalities-note">
+              <BadgeCheck aria-hidden="true" />
+              <p><strong>Badania bez pomyłek:</strong> badanie lekarskie jest częścią standardowej ścieżki kandydata. Badanie psychologiczne dotyczy określonych kategorii i szkoleń zawodowych. Szczegóły znajdziesz po kliknięciu kategorii.</p>
+              <a href="#kategorie">Sprawdź dokumenty <ArrowRight aria-hidden="true" /></a>
             </div>
           </div>
         </section>
 
         <Gallery />
 
-        <section className="reviews-section" id="opinie" aria-labelledby="reviews-title">
-          <div className="section-shell reviews-grid">
-            <Reveal className="reviews-score">
-              <span className="section-index section-index--lime">06 / OPINIE W DANYCH</span>
-              <div className="score-number"><span>4,7</span><small>/5</small></div>
-              <div className="score-stars" aria-label="Ocena 4,7 na 5">
-                {[0, 1, 2, 3, 4].map((star) => <Star key={star} fill="currentColor" aria-hidden="true" />)}
-              </div>
-              <p>ponad 1800 ocen usług w profilu dostawcy BUR</p>
-            </Reveal>
-            <Reveal className="reviews-copy" delay={0.1}>
-              <BadgeCheck aria-hidden="true" />
-              <h2 id="reviews-title">BEZ FIKCYJNYCH<br />NAZWISK I CYTATÓW.</h2>
-              <p>
-                Zamiast wymyślać opinie kursantów, pokazujemy wyłącznie wynik zweryfikowany w publicznej Bazie Usług Rozwojowych. Ocena dotyczy usług dostawcy, a licznik może się zmieniać.
-              </p>
-              <a href="https://uslugirozwojowe.parp.gov.pl/wyszukiwarka/dostawca-uslug/podglad?id=21948" target="_blank" rel="noreferrer">
-                Zobacz profil BUR <ArrowUpRight size={17} aria-hidden="true" />
-              </a>
-            </Reveal>
+        <section className="funding-section section" id="dofinansowanie" aria-labelledby="funding-title">
+          <div className="shell funding-layout">
+            <div className="funding-copy">
+              <span className="section-number">05 / DOFINANSOWANIE</span>
+              <h2 id="funding-title">Rozwijaj kwalifikacje<br /><em>z pomocą BUR.</em></h2>
+              <p>Baza Usług Rozwojowych pomaga znaleźć szkolenia, które mogą być objęte wsparciem. FUKS ma aktywny profil dostawcy i wieloletnią historię zrealizowanych usług.</p>
+              <ul>
+                <li><Check aria-hidden="true" /> sprawdź aktualne usługi FUKS w BUR</li>
+                <li><Check aria-hidden="true" /> skontaktuj się z operatorem właściwego programu</li>
+                <li><Check aria-hidden="true" /> potwierdź warunki przed rozpoczęciem kursu</li>
+              </ul>
+              <a className="button button--yellow" href={contact.bur} target="_blank" rel="noreferrer"><Banknote aria-hidden="true" /> Skorzystaj z dofinansowania BUR <ExternalLink aria-hidden="true" /></a>
+              <small>Nie gwarantujemy wysokości ani przyznania wsparcia — decydują zasady konkretnego programu i operatora.</small>
+            </div>
+            <div className="bur-card">
+              <span className="bur-card__label">Profil dostawcy · dane sprawdzone 17.08.2026</span>
+              <div className="bur-card__score"><strong>4,7</strong><span>/ 5</span></div>
+              <div className="bur-card__stars" aria-label="Ocena 4,7 na 5">{[1, 2, 3, 4, 5].map((star) => <Star key={star} fill="currentColor" aria-hidden="true" />)}</div>
+              <dl>
+                <div><dt>Oceny usług</dt><dd>1 839</dd></div>
+                <div><dt>Zrealizowane usługi</dt><dd>2 200</dd></div>
+                <div><dt>Aktywne usługi</dt><dd>4</dd></div>
+              </dl>
+              <p>Liczby w BUR zmieniają się wraz z kolejnymi usługami i ocenami.</p>
+            </div>
           </div>
         </section>
 
-        <section className="pricing-section" id="cennik" aria-labelledby="pricing-title">
-          <div className="section-shell">
-            <Reveal className="section-heading section-heading--split">
+        <section className="news-section section" id="aktualnosci" aria-labelledby="news-title">
+          <div className="shell">
+            <div className="section-heading section-heading--split">
               <div>
-                <span className="section-index">07 / PAKIETY</span>
-                <h2 id="pricing-title">KURS DOBRANY<br /><em>DO CELU.</em></h2>
+                <span className="section-number">06 / AKTUALNOŚCI</span>
+                <h2 id="news-title">Co nowego<br /><em>w FUKS?</em></h2>
               </div>
-              <div className="section-heading__aside">
-                <p>Ceny i dostępność zmieniają się zależnie od wariantu, naboru i możliwego dofinansowania.</p>
-                <small>Dlatego nie publikujemy niepotwierdzonych kwot.</small>
+              <div className="news-heading__aside">
+                <p>Podglądy pochodzą z oficjalnego profilu. Najświeższe informacje zawsze znajdziesz bezpośrednio na Facebooku.</p>
+                <a href={contact.facebook} target="_blank" rel="noreferrer"><FacebookIcon aria-hidden="true" /> Obserwuj profil <ExternalLink aria-hidden="true" /></a>
               </div>
-            </Reveal>
-
-            <div className="pricing-grid">
-              {packages.map((item, index) => (
-                <Reveal className={`price-card ${item.featured ? "price-card--featured" : ""}`} delay={index * 0.08} key={item.title}>
-                  <span className="price-card__tag">{item.tag}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-                  <div className="price-card__price">
-                    <small>Cena</small>
-                    <strong>ustalana indywidualnie</strong>
-                  </div>
-                  <ul>
-                    {item.points.map((point) => <li key={point}><Check size={16} aria-hidden="true" />{point}</li>)}
-                  </ul>
-                  <BookingButton category={item.category} className={item.featured ? "price-card__cta price-card__cta--dark" : "price-card__cta"}>
-                    Zapytaj o wariant
-                  </BookingButton>
-                </Reveal>
+            </div>
+            <div className="news-grid">
+              {news.map((item) => (
+                <article className="news-card" key={item.title}>
+                  <a href={item.href} target="_blank" rel="noreferrer" aria-label={`${item.title} — otwórz na Facebooku`}>
+                    <span className="news-card__image"><Image src={item.image} alt="" fill sizes="(max-width: 760px) 100vw, 33vw" /></span>
+                    <span className="news-card__content"><small>{item.label}</small><h3>{item.title}</h3><p>{item.text}</p><span>Czytaj na Facebooku <ExternalLink aria-hidden="true" /></span></span>
+                  </a>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
-        <FAQ />
-
-        <section className="contact-section" id="kontakt" aria-labelledby="contact-title">
-          <div className="section-shell">
-            <Reveal className="contact-heading">
-              <span className="section-index section-index--lime">09 / KONTAKT</span>
-              <h2 id="contact-title">ZACZNIJMY<br /><em>OD ROZMOWY.</em></h2>
-              <a className="contact-big-phone" href={contact.phoneHref}>
-                {contact.phoneDisplay}<ArrowRight aria-hidden="true" />
-              </a>
-              <p className="contact-source-note">
-                Adresy poniżej pochodzą z aktualnej karty usługi kat. C w BUR.
-                Miejsce realizacji swojego kursu potwierdź przy zapisie.
-              </p>
-            </Reveal>
-
-            <div className="contact-grid">
-              <Reveal className="contact-map">
-                <div className="map-grid" aria-hidden="true" />
-                <svg viewBox="0 0 600 520" aria-hidden="true">
-                  <path d="M-20 390 C110 350 105 190 245 225 C360 255 385 85 625 105" />
-                  <path d="M95 -30 C120 145 290 135 280 315 C270 430 380 460 520 555" />
-                </svg>
-                <div className="map-pin map-pin--office">
-                  <span><MapPin aria-hidden="true" /></span>
-                  <div><small>BIURO · TEORIA</small><strong>Grodzka 39A</strong></div>
-                </div>
-                <div className="map-pin map-pin--ground">
-                  <span><Route aria-hidden="true" /></span>
-                  <div><small>PLAC MANEWROWY</small><strong>Grottgera 53</strong></div>
-                </div>
-                <div className="map-card">
-                  <span>NOWY SĄCZ</span>
-                  <strong>49°37&apos;N · 20°42&apos;E</strong>
-                  <a href={contact.maps} target="_blank" rel="noreferrer">Wyznacz trasę <ArrowUpRight size={16} aria-hidden="true" /></a>
-                </div>
-              </Reveal>
-
-              <Reveal className="contact-info" delay={0.08}>
-                <div className="contact-data">
-                  <a href={contact.phoneHref}><Phone aria-hidden="true" /><span><small>Telefon</small><strong>{contact.phoneDisplay}</strong></span></a>
-                  <a href="mailto:biuro.oskgron@op.pl"><Mail aria-hidden="true" /><span><small>E-mail</small><strong>biuro.oskgron@op.pl</strong></span></a>
-                  <a href={contact.facebook} target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" /><span><small>Social media</small><strong>Facebook FUKS</strong></span></a>
-                </div>
-                <div className="hours-card">
-                  <Clock3 aria-hidden="true" />
-                  <div>
-                    <small>Godziny wg dwóch katalogów publicznych</small>
-                    <strong>Pon.–pt. 08:30–18:00<br />Sob. 08:00–12:00</strong>
-                    <p>Przed wizytą potwierdź godziny telefonicznie.</p>
-                  </div>
-                </div>
-              </Reveal>
+        <section className="review-section section" id="opinie" aria-labelledby="review-title">
+          <div className="shell review-layout">
+            <div>
+              <span className="section-number">07 / OPINIE W DANYCH</span>
+              <h2 id="review-title">Zaufanie bez<br /><em>wymyślonych cytatów.</em></h2>
+              <p>Pokazujemy wyłącznie mierzalne informacje z oficjalnych profili — bez fikcyjnych nazwisk i historii kursantów.</p>
             </div>
-
-            <div className="contact-form-wrap">
-              <Reveal className="contact-form-copy">
-                <Sparkles aria-hidden="true" />
-                <h3>Sprawdź, jak działa formularz.</h3>
-                <p>To bezpieczna symulacja frontendowa. Wpisane dane pozostają tylko w pamięci przeglądarki i nie są wysyłane.</p>
-                <ul>
-                  <li><ShieldCheck aria-hidden="true" /> bez backendu</li>
-                  <li><UserRoundCheck aria-hidden="true" /> bez zapisu danych</li>
-                </ul>
-              </Reveal>
-              <ContactForm />
+            <div className="review-metrics">
+              <article><strong>4,7/5</strong><span>ocena usług w BUR</span><small>1 839 ocen</small></article>
+              <article><strong>96%</strong><span>poleca na Facebooku</span><small>17 opinii</small></article>
+              <article><strong>2,6 tys.</strong><span>obserwujących profil</span><small>stan 17.08.2026</small></article>
             </div>
           </div>
         </section>
-      </main>
 
+        <section className="booking-section section" aria-labelledby="booking-title">
+          <div className="shell booking-layout">
+            <div className="calendar-card">
+              <CalendarDays aria-hidden="true" />
+              <span>W przygotowaniu</span>
+              <h2 id="booking-title">Kalendarz zapisów online</h2>
+              <p>Pracujemy nad wygodnym wyborem terminów. Na razie rezerwację potwierdzisz bezpośrednio z biurem.</p>
+              <a className="button button--blue" href={contact.phoneHref}><Phone aria-hidden="true" /> Zarezerwuj telefonicznie</a>
+            </div>
+            <div className="payment-card">
+              <Clock3 aria-hidden="true" />
+              <span>Elastyczna płatność</span>
+              <h3>Możliwość płatności w ratach</h3>
+              <p>Istnieje możliwość płatności w ratach. Ostatnia rata musi zostać opłacona najpóźniej w dniu ukończenia kursu.</p>
+              <small>Szczegóły i harmonogram płatności ustal z biurem przed rozpoczęciem szkolenia.</small>
+            </div>
+          </div>
+        </section>
+
+        <FAQ />
+        <ContactSection />
+      </main>
       <Footer />
-      <BookingModal />
       <MobileCta />
-    </>
+    </BranchProvider>
   );
 }

@@ -1,48 +1,38 @@
-import { ArrowUp, MapPin, MessageCircle, Phone } from "lucide-react";
+import Link from "next/link";
+import { ExternalLink, Mail, MapPin, Phone } from "lucide-react";
 import { Brand } from "@/components/brand";
-import { contact } from "@/data/site";
-
-const nav = [
-  ["Kursy", "#kursy"],
-  ["Kategorie", "#kategorie"],
-  ["Jak to działa", "#jak-to-dziala"],
-  ["O nas", "#o-nas"],
-  ["FAQ", "#faq"],
-  ["Kontakt", "#kontakt"],
-] as const;
+import { FacebookIcon } from "@/components/social-icons";
+import { branches, contact } from "@/data/site";
 
 export function Footer() {
   return (
-    <footer className="footer">
-      <div className="footer-marquee" aria-hidden="true">
-        <span>GOTOWI DO DROGI · GOTOWI DO DROGI · GOTOWI DO DROGI ·</span>
-      </div>
-      <div className="section-shell footer-grid">
-        <div className="footer-brand">
-          <Brand inverted />
-          <p>Prawo jazdy i szkolenia zawodowe w Nowym Sączu — od pierwszej decyzji po zawodową trasę.</p>
-          <span className="demo-pill">PROJEKT DEMONSTRACYJNY</span>
+    <footer className="site-footer">
+      <div className="shell site-footer__grid">
+        <div className="site-footer__brand">
+          <Brand />
+          <p>Prawo jazdy wszystkich kategorii, kwalifikacje i szkolenia zawodowe w Nowym Sączu oraz Bobowej.</p>
+          <a href={contact.facebook} target="_blank" rel="noreferrer"><FacebookIcon aria-hidden="true" /> Oficjalny Facebook <ExternalLink aria-hidden="true" /></a>
         </div>
-
-        <div className="footer-column">
-          <h2>Nawigacja</h2>
-          {nav.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
+        <div>
+          <h2>Oddziały</h2>
+          {Object.values(branches).map((branch) => <p className="footer-address" key={branch.key}><MapPin aria-hidden="true" /><span><strong>{branch.shortLabel}</strong>{branch.address}, {branch.postalCode}</span></p>)}
         </div>
-
-        <div className="footer-column">
+        <div>
           <h2>Kontakt</h2>
-          <a href={contact.phoneHref}><Phone size={15} aria-hidden="true" /> {contact.phoneDisplay}</a>
-          <a href={contact.maps} target="_blank" rel="noreferrer"><MapPin size={15} aria-hidden="true" /> Grodzka 39A</a>
-          <a href={contact.facebook} target="_blank" rel="noreferrer"><MessageCircle size={15} aria-hidden="true" /> Facebook</a>
+          <a className="footer-link" href={contact.phoneHref}><Phone aria-hidden="true" /> {contact.phoneDisplay}</a>
+          <a className="footer-link" href={contact.emailHref}><Mail aria-hidden="true" /> {contact.email}</a>
         </div>
-
-        <a href="#top" className="back-to-top" aria-label="Wróć na początek strony">
-          <ArrowUp aria-hidden="true" />
-        </a>
+        <div>
+          <h2>Informacje</h2>
+          <Link href="/kursy-zawodowe">Kursy zawodowe</Link>
+          <a href="#dofinansowanie">Dofinansowanie BUR</a>
+          <Link href="/polityka-prywatnosci">Polityka prywatności</Link>
+          <Link href="/polityka-cookies">Polityka cookies</Link>
+        </div>
       </div>
-      <div className="section-shell footer-bottom">
-        <p>© 2026 FUKS — koncepcja demonstracyjna. To nie jest oficjalna strona firmy.</p>
-        <p>Rezerwacje, płatności, terminy i formularze są wyłącznie symulacją frontendową.</p>
+      <div className="shell site-footer__bottom">
+        <span>© {new Date().getFullYear()} FUKS Krzysztof Groń</span>
+        <span>Stan informacji prawnych: 17.08.2026</span>
       </div>
     </footer>
   );
