@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { ArrowDown, BadgeCheck, Phone, Search } from "lucide-react";
+import { ArrowDown, BadgeCheck, Search } from "lucide-react";
 import { BranchBadge } from "@/components/branch-experience";
-import { contact } from "@/data/site";
+import { BranchPhoneButton } from "@/components/branch-phone-button";
 
 export function Hero() {
   return (
@@ -22,7 +22,7 @@ export function Hero() {
           <h1 id="hero-title">Lubimy<br /><em>uczyć jeździć.</em></h1>
           <p>Od pierwszej lekcji po zawodową trasę. Wszystkie kategorie, dwa oddziały i doświadczenie, które daje spokój za kierownicą.</p>
           <div className="hero__actions">
-            <a className="button button--yellow" href={contact.phoneHref}><Phone aria-hidden="true" /> Zadzwoń i zapisz się</a>
+            <BranchPhoneButton className="button button--yellow" label="Zadzwoń i zapisz się" />
             <a className="button button--glass" href="#kategorie"><Search aria-hidden="true" /> Znajdź kategorię</a>
           </div>
           <div className="hero__facts" aria-label="Najważniejsze informacje">

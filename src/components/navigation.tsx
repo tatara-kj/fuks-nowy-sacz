@@ -4,8 +4,7 @@ import Link from "next/link";
 import { Menu, Phone, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Brand } from "@/components/brand";
-import { BranchBadge } from "@/components/branch-experience";
-import { contact } from "@/data/site";
+import { BranchBadge, useBranch } from "@/components/branch-experience";
 
 const links = [
   { href: "#kategorie", label: "Kategorie" },
@@ -17,6 +16,7 @@ const links = [
 ];
 
 export function Navigation() {
+  const { branch } = useBranch();
   const [open, setOpen] = useState(false);
   const menuToggleRef = useRef<HTMLButtonElement>(null);
 
@@ -46,8 +46,8 @@ export function Navigation() {
         </nav>
         <div className="site-header__actions">
           <BranchBadge />
-          <a className="header-phone" href={contact.phoneHref} aria-label={`Zadzwoń: ${contact.phoneDisplay}`}>
-            <Phone aria-hidden="true" /><span>{contact.phoneDisplay}</span>
+          <a className="header-phone" href={branch.phoneHref} aria-label={`Zadzwoń: ${branch.phoneDisplay}`}>
+            <Phone aria-hidden="true" /><span>{branch.phoneDisplay}</span>
           </a>
           <button ref={menuToggleRef} className="menu-toggle" type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? "Zamknij menu" : "Otwórz menu"}>
             {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
@@ -58,7 +58,7 @@ export function Navigation() {
         <BranchBadge onOpen={() => setOpen(false)} returnFocusTo={menuToggleRef} />
         {links.map((link) => <a key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.label}</a>)}
         <Link href="/kursy-zawodowe" onClick={() => setOpen(false)}>Kursy zawodowe</Link>
-        <a className="button button--yellow" href={contact.phoneHref} onClick={() => setOpen(false)}><Phone aria-hidden="true" /> Zadzwoń i zapisz się</a>
+        <a className="button button--yellow" href={branch.phoneHref} onClick={() => setOpen(false)}><Phone aria-hidden="true" /> Zadzwoń i zapisz się</a>
       </nav>
     </header>
   );

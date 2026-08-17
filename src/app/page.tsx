@@ -9,13 +9,13 @@ import {
   Clock3,
   ExternalLink,
   GraduationCap,
-  Phone,
   Route,
   ShieldCheck,
   Star,
   Users,
 } from "lucide-react";
 import { BranchProvider } from "@/components/branch-experience";
+import { BranchPhoneButton } from "@/components/branch-phone-button";
 import { ContactSection } from "@/components/contact-section";
 import { CourseBrowser } from "@/components/course-browser";
 import { FAQ } from "@/components/faq";
@@ -58,8 +58,8 @@ const organizationJsonLd = {
   department: Object.values(branches).map((branch) => ({
     "@type": "LocalBusiness",
     name: `FUKS — ${branch.shortLabel}`,
-    telephone: "+48606647396",
-    email: contact.email,
+    telephone: branch.phoneHref.replace("tel:", ""),
+    email: branch.email,
     address: {
       "@type": "PostalAddress",
       streetAddress: branch.address,
@@ -223,7 +223,7 @@ export default function Home() {
               <span>W przygotowaniu</span>
               <h2 id="booking-title">Kalendarz zapisów online</h2>
               <p>Pracujemy nad wygodnym wyborem terminów. Na razie rezerwację potwierdzisz bezpośrednio z biurem.</p>
-              <a className="button button--blue" href={contact.phoneHref}><Phone aria-hidden="true" /> Zarezerwuj telefonicznie</a>
+              <BranchPhoneButton className="button button--blue" label="Zarezerwuj telefonicznie" />
             </div>
             <div className="payment-card">
               <Clock3 aria-hidden="true" />

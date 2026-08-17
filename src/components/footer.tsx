@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ExternalLink, Mail, MapPin, Phone } from "lucide-react";
+import { ExternalLink, MapPin } from "lucide-react";
 import { Brand } from "@/components/brand";
 import { FacebookIcon } from "@/components/social-icons";
+import { BranchEmailLink, BranchPhoneButton } from "@/components/branch-phone-button";
 import { branches, contact } from "@/data/site";
 
 export function Footer() {
@@ -19,8 +20,8 @@ export function Footer() {
         </div>
         <div>
           <h2>Kontakt</h2>
-          <a className="footer-link" href={contact.phoneHref}><Phone aria-hidden="true" /> {contact.phoneDisplay}</a>
-          <a className="footer-link" href={contact.emailHref}><Mail aria-hidden="true" /> {contact.email}</a>
+          <BranchPhoneButton className="footer-link" />
+          <BranchEmailLink className="footer-link" />
         </div>
         <div>
           <h2>Informacje</h2>

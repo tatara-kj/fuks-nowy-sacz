@@ -2,7 +2,6 @@
 
 import { Clock3, ExternalLink, Mail, MapPin, Phone, Route, ShieldCheck } from "lucide-react";
 import { useBranch } from "@/components/branch-experience";
-import { contact } from "@/data/site";
 
 export function ContactSection() {
   const { branch, showSelector } = useBranch();
@@ -30,8 +29,8 @@ export function ContactSection() {
 
           <div className="contact-card">
             <span className="contact-card__branch">{branch.label}</span>
-            <a className="contact-card__phone" href={contact.phoneHref}><Phone aria-hidden="true" /><span><small>Telefon i zapisy</small><strong>{contact.phoneDisplay}</strong></span></a>
-            <a className="contact-card__row" href={contact.emailHref}><Mail aria-hidden="true" /><span><small>E-mail</small><strong>{contact.email}</strong></span></a>
+            <a className="contact-card__phone" href={branch.phoneHref}><Phone aria-hidden="true" /><span><small>Telefon i zapisy</small><strong>{branch.phoneDisplay}</strong></span></a>
+            <a className="contact-card__row" href={branch.emailHref}><Mail aria-hidden="true" /><span><small>E-mail</small><strong>{branch.email}</strong></span></a>
             <a className="contact-card__row" href={branch.mapsUrl} target="_blank" rel="noreferrer"><MapPin aria-hidden="true" /><span><small>Biuro i teoria</small><strong>{branch.address}, {branch.postalCode} {branch.city}</strong></span><ExternalLink aria-hidden="true" /></a>
             <div className="contact-card__row"><Route aria-hidden="true" /><span><small>Zajęcia praktyczne</small><strong>{branch.trainingGround ?? branch.trainingGroundNote}</strong></span></div>
             <div className="contact-hours">

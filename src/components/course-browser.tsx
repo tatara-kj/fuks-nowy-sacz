@@ -22,7 +22,8 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
-import { contact, courses, type Course, type CourseIcon } from "@/data/site";
+import { useBranch } from "@/components/branch-experience";
+import { courses, type Course, type CourseIcon } from "@/data/site";
 
 const icons: Record<CourseIcon, LucideIcon> = {
   bike: Bike,
@@ -57,6 +58,7 @@ function getCourseHash() {
 }
 
 export function CourseBrowser() {
+  const { branch } = useBranch();
   const [query, setQuery] = useState("");
   const dialogRef = useRef<HTMLDialogElement>(null);
   const courseHash = useSyncExternalStore(subscribeToCourseHash, getCourseHash, () => "");
@@ -127,7 +129,7 @@ export function CourseBrowser() {
               <CircleAlert aria-hidden="true" />
               <h3>Nie znaleźliśmy takiej frazy.</h3>
               <p>Spróbuj wpisać literę kategorii albo zadzwoń — pomożemy dobrać szkolenie.</p>
-              <a className="button button--blue" href={contact.phoneHref}><Phone aria-hidden="true" /> {contact.phoneDisplay}</a>
+              <a className="button button--blue" href={branch.phoneHref}><Phone aria-hidden="true" /> {branch.phoneDisplay}</a>
             </div>
           )}
         </div>
@@ -141,6 +143,7 @@ export function CourseBrowser() {
 }
 
 function CourseDetails({ course, onClose }: { course: Course; onClose: () => void }) {
+  const { branch } = useBranch();
   const Icon = icons[course.icon];
   return (
     <div className="course-dialog__layout">
@@ -152,7 +155,7 @@ function CourseDetails({ course, onClose }: { course: Course; onClose: () => voi
         <h2 id={`course-dialog-${course.id}`}>{course.title}</h2>
         <p>{course.summary}</p>
         <div className="course-dialog__age"><small>Minimalny wiek</small><b>{course.minimumAge}</b></div>
-        <a className="button button--yellow" href={contact.phoneHref}><Phone aria-hidden="true" /> Zadzwoń i zapisz się</a>
+        <a className="button button--yellow" href={branch.phoneHref}><Phone aria-hidden="true" /> Zadzwoń i zapisz się</a>
       </aside>
       <div className="course-dialog__body">
         {course.important ? <div className="legal-alert"><CircleAlert aria-hidden="true" /><p><strong>Ważna aktualizacja</strong>{course.important}</p></div> : null}

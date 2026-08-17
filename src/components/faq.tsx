@@ -1,5 +1,6 @@
-import { ChevronDown, FileText, Phone, Search } from "lucide-react";
-import { contact, faqs } from "@/data/site";
+import { ChevronDown, FileText, Search } from "lucide-react";
+import { BranchPhoneButton } from "@/components/branch-phone-button";
+import { faqs } from "@/data/site";
 
 export function FAQ() {
   return (
@@ -12,7 +13,7 @@ export function FAQ() {
           <div className="faq-actions">
             <a href="#kategorie"><Search aria-hidden="true" /> Przejdź do kategorii</a>
             <a href="#trasa-kursu"><FileText aria-hidden="true" /> Jak wygląda kurs</a>
-            <a href={contact.phoneHref}><Phone aria-hidden="true" /> Zadzwoń do biura</a>
+            <BranchPhoneButton label="Zadzwoń do biura" />
           </div>
         </div>
         <div className="faq-list">

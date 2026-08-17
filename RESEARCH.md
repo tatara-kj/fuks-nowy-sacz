@@ -10,7 +10,7 @@ Stan weryfikacji: **17 sierpnia 2026 r.**
 | Telefon | 606 647 396 | brief właściciela i oficjalny Facebook |
 | E-mail publiczny | biuro.oskgron@op.pl | brief właściciela i oficjalny Facebook |
 | Nowy Sącz | ul. Grodzka 39A; plac ul. Artura Grottgera 53 | brief właściciela, Facebook i karty BUR |
-| Bobowa | Rynek 3 | brief właściciela |
+| Bobowa | Rynek 3; tel. 660 125 532; bobowa.gron@gmail.com; pon., wt. i pt. 08:30–16:30 | e-mail właściciela, 17.08.2026 |
 | Doświadczenie | szkolenia od 2003 r. | [profil dostawcy BUR 21948](https://uslugirozwojowe.parp.gov.pl/wyszukiwarka/dostawca-uslug/podglad?id=21948) |
 | Ocena BUR | 4,7/5, 1839 ocen, 2200 usług zrealizowanych, 4 aktywne | profil dostawcy BUR, odczyt 17.08.2026 |
 | Facebook | 2,6 tys. obserwujących; 96% poleca przy 17 opiniach | publiczny profil, odczyt 17.08.2026 |

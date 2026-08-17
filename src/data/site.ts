@@ -7,6 +7,10 @@ export type Branch = {
   address: string;
   postalCode: string;
   city: string;
+  phoneDisplay: string;
+  phoneHref: string;
+  email: string;
+  emailHref: string;
   trainingGround?: string;
   trainingGroundNote?: string;
   hours: Array<{ days: string; hours: string }>;
@@ -63,6 +67,10 @@ export const branches: Record<BranchKey, Branch> = {
     address: "ul. Grodzka 39A",
     postalCode: "33-300",
     city: "Nowy Sącz",
+    phoneDisplay: "606 647 396",
+    phoneHref: "tel:+48606647396",
+    email: "biuro.oskgron@op.pl",
+    emailHref: "mailto:biuro.oskgron@op.pl",
     trainingGround: "ul. Artura Grottgera 53, Nowy Sącz",
     hours: [
       { days: "Poniedziałek–piątek", hours: "08:30–18:00" },
@@ -80,11 +88,14 @@ export const branches: Record<BranchKey, Branch> = {
     address: "Rynek 3",
     postalCode: "38-350",
     city: "Bobowa",
+    phoneDisplay: "660 125 532",
+    phoneHref: "tel:+48660125532",
+    email: "bobowa.gron@gmail.com",
+    emailHref: "mailto:bobowa.gron@gmail.com",
     trainingGroundNote: "Miejsce zajęć praktycznych potwierdzimy telefonicznie przy zapisie.",
     hours: [
-      { days: "Poniedziałek–piątek", hours: "08:00–16:00" },
-      { days: "Sobota", hours: "08:00–13:00" },
-      { days: "Niedziela", hours: "nieczynne" },
+      { days: "Poniedziałek, wtorek, piątek", hours: "08:30–16:30" },
+      { days: "Środa, czwartek, sobota, niedziela", hours: "nieczynne" },
     ],
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Rynek+3+Bobowa",
     mapQuery: "Rynek 3, 38-350 Bobowa",

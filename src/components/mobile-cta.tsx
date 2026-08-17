@@ -1,6 +1,9 @@
+"use client";
+
 import { Phone } from "lucide-react";
-import { contact } from "@/data/site";
+import { useBranch } from "@/components/branch-experience";
 
 export function MobileCta() {
-  return <a className="mobile-cta" href={contact.phoneHref}><Phone aria-hidden="true" /><span><small>Zapisy telefoniczne</small><strong>{contact.phoneDisplay}</strong></span></a>;
+  const { branch } = useBranch();
+  return <a className="mobile-cta" href={branch.phoneHref}><Phone aria-hidden="true" /><span><small>Zapisy telefoniczne</small><strong>{branch.phoneDisplay}</strong></span></a>;
 }
