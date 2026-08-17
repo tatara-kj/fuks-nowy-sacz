@@ -22,8 +22,9 @@ Adres placu w Bobowej nie został opublikowany, ponieważ nie był potwierdzony.
 - [Kategorie prawa jazdy — Ministerstwo Infrastruktury](https://www.gov.pl/web/infrastruktura/kategorie-prawa-jazdy)
 - [Prawo jazdy od 17 lat — zmiany od 3 marca 2026 r.](https://www.gov.pl/web/infrastruktura/uwaga-kierowcy--od-3-marca-obowiazuja-nowe-przepisy---sprawdz-co-sie-zmienilo)
 - [Towary niebezpieczne i ADR — Ministerstwo Infrastruktury](https://www.gov.pl/web/infrastruktura/towary-niebezpieczne)
+- [Ustawa o transporcie drogowym — tekst ujednolicony ELI, art. 39a](https://eli.gov.pl/api/acts/DU/2025/1490/text/U/D20251490Lj.pdf)
 
-Serwis pokazuje stan prawny na 17.08.2026. Zmiany dla wybranych ścieżek autobusowych obowiązujące od 03.09.2026 są opisane oddzielnie, bez łączenia ich z zasadami aktualnymi.
+Serwis pokazuje stan prawny na 17.08.2026. Zmiany dla wybranych ścieżek autobusowych obowiązujące od 03.09.2026 są opisane oddzielnie, bez łączenia ich z zasadami aktualnymi. Od tej daty, przy kwalifikacji wstępnej, pojawią się wyjątki: D1/D1+E od 18 lat w przewozie krajowym, D/D+E od 20 lat w przewozie krajowym oraz od 18 lat na krajowych liniach regularnych do 50 km.
 
 Nie publikujemy niezweryfikowanych godzin programu kursów ani ogólnego cennika. Dokładny czas, cena, dostępność i miejsce szkolenia wymagają potwierdzenia telefonicznego.
 

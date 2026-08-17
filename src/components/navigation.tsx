@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Menu, Phone, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Brand } from "@/components/brand";
 import { BranchBadge } from "@/components/branch-experience";
 import { contact } from "@/data/site";
@@ -18,10 +18,22 @@ const links = [
 
 export function Navigation() {
   const [open, setOpen] = useState(false);
+  const menuToggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", open);
     return () => document.body.classList.remove("menu-open");
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      menuToggleRef.current?.focus();
+    }
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
   }, [open]);
 
   return (
@@ -37,12 +49,13 @@ export function Navigation() {
           <a className="header-phone" href={contact.phoneHref} aria-label={`Zadzwoń: ${contact.phoneDisplay}`}>
             <Phone aria-hidden="true" /><span>{contact.phoneDisplay}</span>
           </a>
-          <button className="menu-toggle" type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? "Zamknij menu" : "Otwórz menu"}>
+          <button ref={menuToggleRef} className="menu-toggle" type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? "Zamknij menu" : "Otwórz menu"}>
             {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
           </button>
         </div>
       </div>
       <nav id="mobile-navigation" className={`mobile-nav ${open ? "mobile-nav--open" : ""}`} aria-label="Nawigacja mobilna">
+        <BranchBadge onOpen={() => setOpen(false)} returnFocusTo={menuToggleRef} />
         {links.map((link) => <a key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.label}</a>)}
         <Link href="/kursy-zawodowe" onClick={() => setOpen(false)}>Kursy zawodowe</Link>
         <a className="button button--yellow" href={contact.phoneHref} onClick={() => setOpen(false)}><Phone aria-hidden="true" /> Zadzwoń i zapisz się</a>

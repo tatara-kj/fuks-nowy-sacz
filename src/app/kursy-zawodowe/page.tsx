@@ -28,7 +28,7 @@ export default function ProfessionalCoursesPage() {
   return (
     <BranchProvider>
       <Navigation />
-      <main>
+      <main id="main-content">
         <section className="subpage-hero subpage-hero--professional">
           <Image src="/images/fleet/ciezarowki-fuks.jpg" alt="Ciężarówki szkoleniowe FUKS" fill priority sizes="100vw" />
           <div className="subpage-hero__veil" aria-hidden="true" />

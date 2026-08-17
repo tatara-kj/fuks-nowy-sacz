@@ -22,7 +22,7 @@ export function ContactSection() {
           </div>
           <div className="contact-heading__cta">
             <span>Wybrany oddział: <strong>{branch.shortLabel}</strong></span>
-            <button type="button" onClick={showSelector}>Zmień oddział</button>
+            <button type="button" onClick={(event) => showSelector(event.currentTarget)}>Zmień oddział</button>
           </div>
         </div>
 

@@ -69,12 +69,15 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pl" className={`${manrope.variable} ${barlow.variable}`} suppressHydrationWarning>
+      <head>
+        <Script id="restore-fuks-branch" strategy="beforeInteractive">{`try{var b=localStorage.getItem("fuks-branch:v1");if(b==="nowy-sacz"||b==="bobowa")document.documentElement.dataset.fuksBranch=b}catch(e){}`}</Script>
+      </head>
       <body>
+        <a className="skip-link" href="#main-content">Przejdź do treści</a>
         {children}
         <Analytics />
         <SpeedInsights />
       </body>
-      <Script id="restore-fuks-branch" strategy="beforeInteractive">{`try{var b=localStorage.getItem("fuks-branch:v1");if(b==="nowy-sacz"||b==="bobowa")document.documentElement.dataset.fuksBranch=b}catch(e){}`}</Script>
     </html>
   );
 }

@@ -81,10 +81,10 @@ const faqJsonLd = {
 
 export default function Home() {
   return (
-    <BranchProvider>
+    <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c") }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }} />
-      <a className="skip-link" href="#main-content">Przejdź do treści</a>
+      <BranchProvider>
       <Navigation />
       <main id="main-content">
         <Hero />
@@ -233,6 +233,7 @@ export default function Home() {
       </main>
       <Footer />
       <MobileCta />
-    </BranchProvider>
+      </BranchProvider>
+    </>
   );
 }

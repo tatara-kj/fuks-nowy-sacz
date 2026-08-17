@@ -72,6 +72,7 @@ export function CourseBrowser() {
     const dialog = dialogRef.current;
     if (!dialog) return;
     if (selected && !dialog.open) dialog.showModal();
+    if (!selected && dialog.open) dialog.close();
   }, [selected]);
 
   function openCourse(course: Course) {
@@ -144,7 +145,7 @@ function CourseDetails({ course, onClose }: { course: Course; onClose: () => voi
   return (
     <div className="course-dialog__layout">
       <aside className="course-dialog__aside">
-        <button className="course-dialog__close" type="button" onClick={onClose} aria-label="Zamknij informacje o kursie"><X aria-hidden="true" /></button>
+        <button className="course-dialog__close" type="button" onClick={onClose} aria-label="Zamknij informacje o kursie" autoFocus><X aria-hidden="true" /></button>
         <Icon className="course-dialog__icon" aria-hidden="true" />
         <span>{course.kicker}</span>
         <strong>{course.code}</strong>
