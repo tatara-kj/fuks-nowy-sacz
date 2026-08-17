@@ -1,77 +1,34 @@
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
-import { Reveal } from "@/components/reveal";
 
-const images = [
-  {
-    src: "/images/demo-car.webp",
-    alt: "Samochód jadący przez leśną drogę — zdjęcie demonstracyjne",
-    category: "B",
-    title: "Pewność w codziennym ruchu",
-    position: "50% 58%",
-    credit: "Luke Miller / Unsplash",
-    href: "https://unsplash.com/photos/car-drives-through-a-forest-on-a-winding-road-K14SKnhLFc0",
-  },
-  {
-    src: "/images/demo-moto.webp",
-    alt: "Motocyklistka na otwartej drodze — zdjęcie demonstracyjne",
-    category: "A",
-    title: "Precyzja na dwóch kołach",
-    position: "50% 50%",
-    credit: "Unsplash",
-    href: "https://unsplash.com",
-  },
-  {
-    src: "/images/demo-truck.webp",
-    alt: "Samochód ciężarowy na trasie — zdjęcie demonstracyjne",
-    category: "C+E",
-    title: "Kompetencje do zawodowej trasy",
-    position: "45% 52%",
-    credit: "Unsplash",
-    href: "https://unsplash.com",
-  },
+const photos = [
+  { src: "/images/fleet/samochody-szkola-jazdy-fuks.jpg", alt: "Samochody szkoleniowe FUKS przed siedzibą", label: "Samochody", className: "gallery-item--wide" },
+  { src: "/images/fleet/autobus-fuks.jpg", alt: "Niebieski autobus szkoleniowy FUKS", label: "Autobus", className: "gallery-item--tall" },
+  { src: "/images/fleet/ciezarowki-fuks.jpg", alt: "Ciężarówki szkoleniowe FUKS", label: "Ciężarówki", className: "" },
+  { src: "/images/fleet/ciagnik-i-auto-fuks.jpg", alt: "Ciągnik rolniczy i samochód szkoleniowy FUKS", label: "Ciągnik", className: "" },
+  { src: "/images/fleet/flota-samochodowa-fuks.jpg", alt: "Flota samochodów osobowych FUKS", label: "Flota", className: "gallery-item--wide" },
+  { src: "/images/fleet/siedziba-flota-fuks.jpg", alt: "Siedziba FUKS i samochody szkoleniowe", label: "Nowy Sącz", className: "" },
 ];
 
 export function Gallery() {
   return (
-    <section className="gallery-section" id="flota" aria-labelledby="gallery-title">
-      <div className="section-shell">
-        <Reveal className="gallery-heading">
+    <section className="gallery-section section" id="galeria" aria-labelledby="gallery-title">
+      <div className="shell">
+        <div className="section-heading section-heading--split">
           <div>
-            <span className="section-index">05 / KIERUNEK</span>
-            <h2 id="gallery-title">JEDNA SZKOŁA.<br />RÓŻNE TRASY.</h2>
+            <span className="section-number">04 / GALERIA</span>
+            <h2 id="gallery-title">Sprzęt, na którym<br /><em>naprawdę uczymy.</em></h2>
           </div>
-          <div className="demo-note demo-note--light">
-            <strong>Zdjęcia demonstracyjne</strong>
-            <p>Nie przedstawiają aktualnej floty FUKS. Modele pojazdów i ich dostępność potwierdź telefonicznie.</p>
-          </div>
-        </Reveal>
-
+          <p>Realna flota FUKS — od samochodów osobowych po ciężarówki, autobus i ciągnik.</p>
+        </div>
         <div className="gallery-grid">
-          {images.map((item, index) => (
-            <Reveal className={`gallery-card gallery-card--${index + 1}`} delay={index * 0.08} key={item.src}>
-              <div className="gallery-card__media">
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  fill
-                  sizes={index === 0 ? "(max-width: 900px) 100vw, 55vw" : "(max-width: 900px) 100vw, 35vw"}
-                  style={{ objectPosition: item.position }}
-                />
-                <span className="gallery-card__category">KAT. {item.category}</span>
-                <div className="gallery-card__scrim" />
-              </div>
-              <div className="gallery-card__caption">
-                <h3>{item.title}</h3>
-                <a href={item.href} target="_blank" rel="noreferrer">
-                  {item.credit} <ArrowUpRight size={14} aria-hidden="true" />
-                </a>
-              </div>
-            </Reveal>
+          {photos.map((photo, index) => (
+            <figure className={`gallery-item ${photo.className}`} key={photo.src}>
+              <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" />
+              <figcaption><span>{String(index + 1).padStart(2, "0")}</span>{photo.label}</figcaption>
+            </figure>
           ))}
         </div>
       </div>
     </section>
   );
 }
-
